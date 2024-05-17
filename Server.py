@@ -1,6 +1,6 @@
 import socket
 import threading
-
+import GUAC
 
 # Server
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -18,6 +18,8 @@ def response_manager(client):
        print('message: ', message.decode())
        message = input('=> ')
        client.send(message.encode())
+
+
 server_inst()
 # serverside - loads dna strand
 # client sends connection request/ready to play
