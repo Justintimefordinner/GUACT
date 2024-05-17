@@ -1,5 +1,4 @@
 from Bio.Seq import Seq
-from Bio.Alphabet import generic_dna
 import random
 import math
 
@@ -49,7 +48,7 @@ class GUAC:
         """
         Generate a random DNA sequence.
         """
-        self.sequence = Seq("".join(random.choice("ATGC") for _ in range(20)), generic_dna)
+        self.sequence = Seq("".join(random.choice("ATGC") for _ in range(20)))
 
     def checker(self, playerID, complement, timestamp):
         """
