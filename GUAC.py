@@ -1,15 +1,26 @@
 from Bio.Seq import Seq
 from Bio.Alphabet import generic_dna
 import random
+import math
 
 class player:
-    def __init__(self, playerID, ip):
+    def __init__(self, playerID: int, ip):
         self.playerID = playerID
         self.ip = ip
         #self.mac = MAC
         self.score = 0
         self.multiplier = 1
         self.combo = 0
+        
+    def update_score(self, score: bool):
+        if score:
+            self.combo += 1
+            self.score += 1 * self.multiplier
+        else:
+            self.combo = 0
+            self.multiplier = 1
+        if self.combo > 1:
+            self.multiplier = math.log(self.combo, 2)
 
 class GUAC:
     def __init__(self):
@@ -19,10 +30,10 @@ class GUAC:
         self.players = {}
         self.game_over = False
     
-    def add_player(self, playerID, ip):
+    def add_player(self, uname, ip):
         # Add a player to the game
-        self.players[playerID] = player(playerID, ip)
-        self.scoreboard[playerID] = 0
+        self.players[uname] = player(uname, ip)
+        self.scoreboard[uname] = 0
         
     def generate_sequence(self):
         # Generate a random DNA sequence
@@ -34,6 +45,13 @@ class GUAC:
             return True
         return False
     
-    def convert_to_mRNA(self):
-        # Convert the DNA sequence to mRNA
-        self.mRNA_sequence = self.sequence.transcribe()
+    def scoreboard(self):
+        # Update the scoreboard
+        for player in self.players:
+            self.scoreboard[player] = f''
+            
+        return self.scoreboard
+        
+    # def convert_to_mRNA(self):
+    #     # Convert the DNA sequence to mRNA
+    #     self.mRNA_sequence = self.sequence.transcribe()
