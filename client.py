@@ -6,7 +6,7 @@ client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect(('localhost', 8080))
 gamestart = False
 
-def client_inst():
+def client_init():
     """
     Function to handle the client-side interaction.
 
@@ -28,6 +28,8 @@ def client_inst():
             gamestart = True
             print('Game starting')
             break
+        
+def conn()
 
  
 while True:

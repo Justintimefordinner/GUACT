@@ -1,6 +1,7 @@
 from Bio.Seq import Seq
 import random
 import math
+import pprint
 
 class player:
     def __init__(self, playerID: int, ip):
@@ -66,18 +67,19 @@ class GUAC:
             return True
         return False
     
-    def scoreboard(self):
+    def update_scoreboard(self):
         """
         Update the scoreboard.
 
         Returns:
         - dict: The updated scoreboard with player usernames as keys and scores as values.
         """
-        for player in self.players:
-            self.scoreboard[player] = f''
+        for player in self.players.values():
+            self.scoreboard[player.playerID] = player.score
             
         return self.scoreboard
         
+    
     # def convert_to_mRNA(self):
     #     # Convert the DNA sequence to mRNA
     #     self.mRNA_sequence = self.sequence.transcribe()
