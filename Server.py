@@ -1,16 +1,16 @@
 import socket
 import threading
+import GUAC
 
+# socket instance
+socket_instance = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+socket_instance.bind(('localhost', 8080))
+socket_instance.listen(5)
 
-# Server
-server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.bind(('localhost', 8080))
-server.listen(5)
-
-def server_inst():
+def server():
    while True:
-       client, address = server.accept()
-       threading.Thread(target=response_manager,args=(client,)).start()
+       socket_connection, address = socket_instance.accept()
+       threading.Thread(target=handle_user_connection, args=[socket_connection, address]).start()
 
 def response_manager(client):
    while True:
@@ -18,7 +18,11 @@ def response_manager(client):
        print('message: ', message.decode())
        message = input('=> ')
        client.send(message.encode())
-server_inst()
+
+def handle_user_connection(connection: socket.socket, address: str) -> None:
+    pass
+
+server()
 # serverside - loads dna strand
 # client sends connection request/ready to play
 # game starts
