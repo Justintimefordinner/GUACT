@@ -29,12 +29,12 @@ def client_init():
             print('Game starting')
             break
         
-def conn()
+def conn():
 
  
-while True:
-    print(client.recv(1024))
-    client.send(input('=> ').encode())
-    message = client.recv(1024).decode()
-    print(f'message: {message}')
-# client sends connection request/ready to play
+    while True:
+        print(client.recv(1024))
+        client.send(input('=> ').encode())
+        message = client.recv(1024).decode()
+        print(f'message: {message}')
+    # client sends connection request/ready to play
