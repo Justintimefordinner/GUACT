@@ -4,7 +4,6 @@ import datetime
 # Client
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect(('localhost', 8080))
-gamestart = False
 
 def client_init():
     """
@@ -19,6 +18,7 @@ def client_init():
     Returns:
     None
     """
+    gamestart = False
     uname = input('Enter your username: ')
     client.send(uname.encode())
     while gamestart == False:
@@ -29,9 +29,10 @@ def client_init():
             print('Game starting')
             break
         
-def conn()
+def conn():
+    pass
 
- 
+client_init()
 while True:
     print(client.recv(1024))
     client.send(input('=> ').encode())

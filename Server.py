@@ -1,16 +1,21 @@
 import socket
 import threading
-import GUAC
+from GUAC import GUAC
 
 # socket instance
 socket_instance = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 socket_instance.bind(('localhost', 8080))
 socket_instance.listen(5)
 
+game = GUAC()
+
 def server():
    while True:
-       socket_connection, address = socket_instance.accept()
-       threading.Thread(target=handle_user_connection, args=[socket_connection, address]).start()
+        socket_connection, address = socket_instance.accept()
+        uname = socket_connection.recv(1024).decode()
+        print(f'{uname} connected')
+        game.add_player(uname, address)
+        threading.Thread(target=handle_user_connection, args=[socket_connection, address]).start()
 
 def response_manager(client):
    while True:
